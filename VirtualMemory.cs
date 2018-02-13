@@ -96,7 +96,7 @@ namespace VirtualConsole
             Random rdm = new Random();
             for (int i = 0; i < refString_length; i++)
             {
-                refStrings.Add(rdm.Next(0, refString_length / (processes.Count)));
+                refStrings.Add(rdm.Next(1, refString_length / (processes.Count)));
             }
 
             List<List<int>> memory_history = new List<List<int>>();
@@ -192,6 +192,7 @@ namespace VirtualConsole
             int memory_index_counter = 0;
             int count = 0;
             int i;
+            List<int> ignoreCase = new List<int>();
 
             for (i = current_refString_index - 1; i >= 0; i--)
             {
@@ -201,7 +202,9 @@ namespace VirtualConsole
                     if (refStrings[i] == m)
                     {
                         next_index = memory_index_counter;
-                        count++;
+                        ignoreCase.Add(m);
+                        if(ignoreCase.Count(o=>o.Equals(m)) == 1)
+                            count++;
                     }
                     memory_index_counter++;
                 }
